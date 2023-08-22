@@ -15,8 +15,6 @@ export const UserDetail = ({ user }) => {
       if (!ignore) {
         setPosts(post);
       }
-
-      console.log(post);
     };
     fetchUserPosts();
 
@@ -31,7 +29,6 @@ export const UserDetail = ({ user }) => {
       <p>user: {user.name}</p>
       <p>email: {user.email}</p>
       <p>website: www.{user.website}</p>
-      <p>company: {user.company.name}</p>
       <hr />
       <ul>
         {posts &&
