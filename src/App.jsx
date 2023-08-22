@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UserDetail } from "./UserDetail";
 import { UserForm } from "./utils/UserForm";
 
@@ -16,10 +16,11 @@ const App = () => {
   }, []);
 
   const createUser = async (user) => {
+    // No error handling, normally you would do that.
     const response = await fetch("http://localhost:3000/users", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
+      headers: { "Content-Type": "application/json;charset=utf-8" },
     });
     user.id = (await response.json()).id;
     setUsers(users.concat(user));
@@ -27,20 +28,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Talking to API exercise: Blogging Site</h1>
-
+      <h1>React Hooks exercise starter</h1>
       <UserForm createUser={createUser} />
       <ul>
-        {users.map((user) => {
-          return (
-            <li key={user.id} onClick={() => setSelectedUser(user)}>
-              {user.name}
-            </li>
-          );
-        })}
+        {users.map((user) => (
+          <li onClick={() => setSelectedUser(user)} key={user.id}>
+            {user.name}
+          </li>
+        ))}
       </ul>
       {selectedUser && <UserDetail user={selectedUser} />}
     </div>
   );
 };
+
 export default App;

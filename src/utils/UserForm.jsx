@@ -5,9 +5,10 @@ export const UserForm = ({ createUser }) => {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
 
+    // An async function, but no need to wait for it.
     createUser({ name, email, website });
 
     // Empty the form fields.
@@ -18,28 +19,28 @@ export const UserForm = ({ createUser }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Name: </label>
       <input
         type="text"
+        required="required"
+        placeholder="name"
+        onChange={e => setName(e.target.value)}
         value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
       />
-      <label>Email: </label>
       <input
         type="email"
+        required="required"
+        placeholder="email"
+        onChange={e => setEmail(e.target.value)}
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
       />
-      <label>Website: </label>
       <input
-        type="text"
+        type="url"
+        required="required"
+        placeholder="website"
+        onChange={e => setWebsite(e.target.value)}
         value={website}
-        onChange={(e) => setWebsite(e.target.value)}
-        required
       />
-      <input type="submit" value="Submit" />
+      <button type="submit">Add user</button>
     </form>
   );
 };
